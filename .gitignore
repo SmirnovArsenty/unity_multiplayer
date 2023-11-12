@@ -1,0 +1,12 @@
+Logs/
+Temp/
+UserSettings/
+Library/
+*.meta
+*.pdb
+*.dll
+*.rsp
+*.rsp2
+*.mvfrm
+*.txt
+*.info
