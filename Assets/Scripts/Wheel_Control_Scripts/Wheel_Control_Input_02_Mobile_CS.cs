@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 
-
 namespace ChobiAssets.KTP
 {
 
     public class Wheel_Control_Input_02_Mobile_CS : Wheel_Control_Input_00_Base_CS
     {
 #if UNITY_ANDROID || UNITY_IPHONE
-     
-        Vector2 currentAxis;
-        Vector2 targetAxis;
-        float turnVelocity;
+        [SerializeField]
+        public Vector2 currentAxis;
+        [SerializeField]
+        public Vector2 targetAxis;
+        [SerializeField]
+        public float turnVelocity;
 
         public override void Get_Input()
         {
@@ -83,7 +84,7 @@ namespace ChobiAssets.KTP
 
             // Set the aixs.
             wheelControlScript.moveAxis = currentAxis;
-        }  
+        }
 
 #endif
     }

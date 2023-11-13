@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 namespace ChobiAssets.KTP
 {
 
@@ -8,9 +7,12 @@ namespace ChobiAssets.KTP
     {
 #if !UNITY_ANDROID && !UNITY_IPHONE
 
-        Vector2 currentAxis;
-        Vector2 targetAxis;
-        float turnVelocity;
+        [SerializeField]
+        public Vector2 currentAxis;
+        [SerializeField]
+        public Vector2 targetAxis;
+        [SerializeField]
+        public float turnVelocity;
 
         public override void Get_Input()
         {

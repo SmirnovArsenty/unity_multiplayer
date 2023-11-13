@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
 namespace ChobiAssets.KTP
 {
 
@@ -84,8 +83,11 @@ namespace ChobiAssets.KTP
             if (bodyRigidbody == null)
             {
                 var idScript = GetComponentInParent<ID_Control_CS>();
-            bodyTransform = idScript.bodyTransform;
-            bodyRigidbody = idScript.bodyRigidbody;
+                bodyTransform = idScript.bodyTransform;
+                bodyRigidbody = idScript.bodyRigidbody;
+            }
+            if (bodyRigidbody == null) {
+                return;
             }
             // Get the input.
             inputScript.Get_Input();
@@ -187,7 +189,7 @@ namespace ChobiAssets.KTP
                     bodyRigidbody.constraints = RigidbodyConstraints.None;
                     stoppingTime = 0.0f;
                 }
-            }         
+            }
         }
 
 

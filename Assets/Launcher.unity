@@ -370,7 +370,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1853890659}
         m_TargetAssemblyTypeName: Com.MyCompany.MyGame.Launcher, Assembly-CSharp
-        m_MethodName: Connect
+        m_MethodName: Join
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

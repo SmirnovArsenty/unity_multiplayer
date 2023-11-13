@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 namespace ChobiAssets.KTP
 {
 
@@ -81,7 +80,6 @@ namespace ChobiAssets.KTP
 
         public void Receive_ID_Script(ID_Control_CS idScript)
         { // Called from "ID_Control_CS" in tanks in the scene, when the tank is spawned.
-
             // Store the "ID_Control_CS".
             idScriptsList.Add(idScript);
         }
@@ -89,66 +87,12 @@ namespace ChobiAssets.KTP
 
         void Update()
         {
-            // Reload the scene.
-#if !UNITY_ANDROID && !UNITY_IPHONE
-            if (Key_Bindings_CS.IsRestartKeyDown())
-            {
-                Time.timeScale = 1.0f;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                return;
-            }
-#endif
-
-            // Switch tank.
-#if UNITY_ANDROID || UNITY_IPHONE
-            if (isPaused == false && isSwitchButtonDown == false && Key_Bindings_CS.IsSwitchButtonPressing)
-            { // Switch button is pressed.
-                isSwitchButtonDown = true;
-                Switch_Tank();
-                return;
-            }
-
-            if (isPaused == false && isSwitchButtonDown && Key_Bindings_CS.IsSwitchButtonPressing == false)
-            { // Switch button is released.
-                isSwitchButtonDown = false;
-                return;
-            }
-#else
-            if (isPaused == false && Key_Bindings_CS.IsSwitchKeyDown())
-            {
-                Switch_Tank();
-            }
-#endif
-
-
             // Quit.
             if (Key_Bindings_CS.IsQuitKeyDown())
             {
                 Application.Quit();
                 return;
             }
-
-            // Pause.
-#if UNITY_ANDROID || UNITY_IPHONE
-            if (isPauseButtonDown == false && Key_Bindings_CS.IsPauseButtonPressing)
-            { // Pause button is pressed.
-                isPauseButtonDown = true;
-                Pause();
-                return;
-            }
-
-            if (isPauseButtonDown && Key_Bindings_CS.IsPauseButtonPressing == false)
-            { // Pause button is released.
-                isPauseButtonDown = false;
-                return;
-            }
-#else
-            if (Key_Bindings_CS.IsPauseKeyDown())
-            {
-                Pause();
-                return;
-            }
-#endif
 
             // Control the cursor state.
 #if !UNITY_ANDROID && !UNITY_IPHONE
@@ -175,64 +119,9 @@ namespace ChobiAssets.KTP
         }
 
 
-        void Pause()
-        {
-            isPaused = !isPaused;
-
-            // Set the time scale, and the cursor state.
-            if (isPaused)
-            {
-                Time.timeScale = 0.0f;
-#if !UNITY_ANDROID && !UNITY_IPHONE
-                storedCursorVisible = Cursor.visible;
-                Switch_Cursor(true);
-#endif
-            }
-            else
-            {
-                Time.timeScale = 1.0f;
-#if !UNITY_ANDROID && !UNITY_IPHONE
-                Switch_Cursor(storedCursorVisible);
-#endif
-            }
-
-            // Send message to all the tank parts via "ID_Control_CS" in each tank in the scene.
-            for (int i = 0; i < idScriptsList.Count; i++)
-            {
-                if (idScriptsList[i])
-                {
-                    idScriptsList[i].BroadcastMessage("Pause", isPaused, SendMessageOptions.DontRequireReceiver);
-                }
-            }
-
-            // Send message to "Camera_Manager_CS" in the scene.
-            if (Camera_Manager_CS.instance)
-            {
-                Camera_Manager_CS.instance.BroadcastMessage("Pause", isPaused, SendMessageOptions.DontRequireReceiver);
-            }
-        }
-
-
-        void Switch_Tank()
-        {
-            // Proceed the current ID number.
-            currentID += 1;
-            if (currentID > idScriptsList.Count - 1)
-            {
-                currentID = 0;
-            }
-
-            // Call "ID_Control_CS" in each tank in the scene.
-            for (int i = 0; i < idScriptsList.Count; i++)
-            {
-                idScriptsList[i].Receive_Current_ID(currentID);
-            }
-        }
-
 
         public void Remove_ID(ID_Control_CS idScript)
         { // Called from "ID_Control_CS", when the tank is removed from the scene.
-
             // Remove the "ID_Control_CS" from the list.
             idScriptsList.Remove(idScript);
         }

@@ -28,7 +28,8 @@ namespace ChobiAssets.KTP
         float killHight = -64.0f;
         Damage_Display_CS displayScript;
         float initialDurability;
-        float currentDurability;
+        [SerializeField]
+        public float currentDurability = 1.0f;
         GameObject dyingObject;
         bool isDead;
 
@@ -82,6 +83,12 @@ namespace ChobiAssets.KTP
 
         void Update()
         {
+            if (bodyTransform == null) {
+                Initialize();
+            }
+            if (bodyTransform == null) {
+                return;
+            }
             // Check the hight and the rotation.
             Check_Height_And_Rotation();
         }
@@ -89,6 +96,12 @@ namespace ChobiAssets.KTP
 
         void Check_Height_And_Rotation()
         {
+            if (bodyTransform == null) {
+                Initialize();
+            }
+            if (bodyTransform == null) {
+                return;
+            }
             if (bodyTransform.position.y < killHight)
             { // The tank is under the kill hight.
                 Start_Destroying();
@@ -161,6 +174,12 @@ namespace ChobiAssets.KTP
 
         void Destroyed_Linkage()
         {
+            if (bodyTransform == null) {
+                Initialize();
+            }
+            if (bodyTransform == null) {
+                return;
+            }
             // Spawn the destroyed effects.
             if (destroyedPrefab)
             {

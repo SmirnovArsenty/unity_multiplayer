@@ -78,6 +78,9 @@ namespace ChobiAssets.KTP
 
         void Update()
         {
+            if (bodyRigidbody == null) {
+                Initialize();
+            }
             if (isSelected && inputScript)
             {
                 inputScript.Get_Input();
@@ -87,6 +90,9 @@ namespace ChobiAssets.KTP
 
         void FixedUpdate()
         {
+            if (bodyRigidbody == null) {
+                return;
+            }
             // Update the target position.
             if (targetTransform)
             {

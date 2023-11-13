@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using Photon.Pun;
+
 namespace ChobiAssets.KTP
 {
 
@@ -123,7 +125,7 @@ namespace ChobiAssets.KTP
             // Spawn the broken object.
             if (brokenObject)
             {
-                Instantiate(brokenObject, thisTransform.position, Quaternion.identity);
+                PhotonNetwork.Instantiate(brokenObject.name, thisTransform.position, Quaternion.identity);
             }
 
             // Check the hit object exists.
@@ -156,7 +158,7 @@ namespace ChobiAssets.KTP
             }
 
             // Destroy this object.
-            Destroy(this.gameObject);
+            PhotonNetwork.Destroy(this.gameObject);
         }
     }
 
