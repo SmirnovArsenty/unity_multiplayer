@@ -2,6 +2,10 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
+using DevToDev.Analytics;
+
+using Sentry;
+
 namespace Com.MyCompany.MyGame
 {
     public class Launcher : MonoBehaviourPunCallbacks
@@ -37,7 +41,22 @@ namespace Com.MyCompany.MyGame
         /// </summary>
         void Start()
         {
+            var config = new DTDAnalyticsConfiguration
+            {
+                LogLevel = DTDLogLevel.Debug,
+                TrackingAvailability = DTDTrackingStatus.Enable,
+            };
+            DTDAnalytics.Initialize("5af4b8ef-8764-0913-8a10-07631f633087", config);
+            DTDAnalytics.StartActivity();
+
+            SentrySdk.CaptureMessage("Test event");
+
             Connect();
+        }
+
+        void OnDestroy()
+        {
+            DTDAnalytics.StopActivity();
         }
 
         #endregion
@@ -78,6 +97,8 @@ namespace Com.MyCompany.MyGame
                 // PhotonNetwork.JoinRandomRoom();
                 isConnecting = false;
             // }
+
+            DTDAnalytics.CustomEvent("PUN: onConnectedToMaster");
         }
 
         public override void OnDisconnected(DisconnectCause cause)
