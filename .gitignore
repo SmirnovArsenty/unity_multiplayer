@@ -2,7 +2,6 @@ Logs/
 Temp/
 UserSettings/
 Library/
-*.meta
 *.pdb
 *.dll
 *.rsp
