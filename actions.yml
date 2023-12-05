@@ -12,5 +12,3 @@ jobs:
     steps:
       - name: Unity - Builder
         uses: game-ci/unity-builder@v4.1.1
-        with:
-          projectPath: ./
