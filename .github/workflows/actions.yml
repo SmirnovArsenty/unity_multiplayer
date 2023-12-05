@@ -10,8 +10,8 @@ jobs:
       fail-fast: false
       matrix:
         targetPlatform:
-          - StandaloneWindows # Build a Windows standalone.
-          #- Android # Build an Android .apk standalone app.
+          #- StandaloneWindows # Build a Windows standalone.
+          - Android # Build an Android .apk standalone app.
     steps:
       - uses: actions/checkout@v4
         with:
