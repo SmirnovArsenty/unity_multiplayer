@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-using Photon.Pun;
+// using Photon.Pun;
 
 // This script must be attached to "Fire_Point".
 namespace ChobiAssets.KTP
@@ -48,7 +48,8 @@ namespace ChobiAssets.KTP
             }
 
             // Instantiate the bullet prefab.
-            var bulletObject = PhotonNetwork.Instantiate(bulletPrefab.name, thisTransform.position + thisTransform.forward * spawnOffset, thisTransform.rotation) as GameObject;
+            // var bulletObject = PhotonNetwork.Instantiate(bulletPrefab.name, thisTransform.position + thisTransform.forward * spawnOffset, thisTransform.rotation) as GameObject;
+            var bulletObject = new GameObject();
 
             // Setup "Bullet_Nav_CS" in the bullet.
             var bulletScript = bulletObject.GetComponent<Bullet_Nav_CS>();

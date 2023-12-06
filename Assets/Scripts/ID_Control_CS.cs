@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-using Photon.Pun;
-using Photon.Realtime;
+// using Photon.Pun;
+// using Photon.Realtime;
 
 namespace ChobiAssets.KTP
 {
@@ -32,7 +32,7 @@ namespace ChobiAssets.KTP
 
         bool isSelected;
 
-        public PhotonView photonView;
+        // public PhotonView photonView;
 
         void Start()
         {
@@ -57,8 +57,8 @@ namespace ChobiAssets.KTP
 
         void Store_Components()
         {
-            if (!photonView.IsMine && PhotonNetwork.IsConnected)
-                return;
+            // if (!photonView.IsMine && PhotonNetwork.IsConnected)
+            //     return;
             bodyRigidbody = GetComponentInChildren<Rigidbody>();
             bodyTransform = bodyRigidbody.transform;
             aimingScript = bodyTransform.GetComponent<Aiming_Control_CS>();
@@ -69,8 +69,8 @@ namespace ChobiAssets.KTP
 
         public void Receive_Current_ID(int currentID)
         { // Called from "Game_Controller_CS" in the scene, when the player changes the tank.
-            if (!photonView.IsMine && PhotonNetwork.IsConnected)
-                return;
+            // if (!photonView.IsMine && PhotonNetwork.IsConnected)
+            //     return;
             isSelected = (id == currentID);
             Broadcast_Selection_Condition();
         }
@@ -78,8 +78,8 @@ namespace ChobiAssets.KTP
 
         void Broadcast_Selection_Condition()
         {
-            if (!photonView.IsMine && PhotonNetwork.IsConnected)
-                return;
+            // if (!photonView.IsMine && PhotonNetwork.IsConnected)
+            //     return;
             // Broadcast whether this tank is selected or not to all the children.
             BroadcastMessage("Selected", isSelected, SendMessageOptions.DontRequireReceiver);
         }
@@ -87,8 +87,8 @@ namespace ChobiAssets.KTP
 
         void Selected(bool isSelected)
         {
-            if (!photonView.IsMine && PhotonNetwork.IsConnected)
-                return;
+            // if (!photonView.IsMine && PhotonNetwork.IsConnected)
+            //     return;
             if (isSelected == false)
             {
                 return;
@@ -104,8 +104,8 @@ namespace ChobiAssets.KTP
 
         void Destroyed_Linkage()
         { // Called from "Damage_Control_CS".
-            if (!photonView.IsMine && PhotonNetwork.IsConnected)
-                return;
+            // if (!photonView.IsMine && PhotonNetwork.IsConnected)
+            //     return;
             // Change the tag.
             gameObject.tag = "Finish";
         }
@@ -113,8 +113,8 @@ namespace ChobiAssets.KTP
 
         void OnDestroy()
         { // Called when the tank is removed from the scene.
-            if (!photonView.IsMine && PhotonNetwork.IsConnected)
-                return;
+            // if (!photonView.IsMine && PhotonNetwork.IsConnected)
+            //     return;
             // Send message to the "Game_Controller" in the scene to remove this tank from the lists.
             if (Game_Controller_CS.instance)
             {

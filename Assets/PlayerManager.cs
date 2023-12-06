@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-using Photon.Pun;
+// using Photon.Pun;
 
 using System;
 using System.Collections;
@@ -13,7 +13,7 @@ namespace Com.MyCompany.MyGame
     /// <summary>
     /// Player manager.
     /// </summary>
-    public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
+    public class PlayerManager : MonoBehaviour//PunCallbacks, IPunObservable
     {
         #region Private Fields
 
@@ -44,7 +44,7 @@ namespace Com.MyCompany.MyGame
         {
             if (tank == null) {
                 Thread.Sleep(1000);
-                tank = PhotonNetwork.Instantiate(prefab.name, new Vector3(0, 0, 0), Quaternion.identity, 0);
+                // tank = PhotonNetwork.Instantiate(prefab.name, new Vector3(0, 0, 0), Quaternion.identity, 0);
 
                 SetupControls();
             }
@@ -85,32 +85,32 @@ namespace Com.MyCompany.MyGame
             //     beams.SetActive(IsFiring);
             // }
 
-            if (photonView.IsMine)
-            {
-                if (tank.GetComponent<ChobiAssets.KTP.Damage_Control_CS>().currentDurability <= 0f)
-                {
-                    GameManager.Instance.LeaveRoom();
-                }
-            }
+            // if (photonView.IsMine)
+            // {
+            //     if (tank.GetComponent<ChobiAssets.KTP.Damage_Control_CS>().currentDurability <= 0f)
+            //     {
+            //         GameManager.Instance.LeaveRoom();
+            //     }
+            // }
         }
 
         #endregion
 
         #region IPunObservable implementation
 
-        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-        {
-            if (stream.IsWriting)
-            {
-                // We own this player: send the others our data
-                stream.SendNext(tank.GetComponent<ChobiAssets.KTP.Damage_Control_CS>().currentDurability);
-            }
-            else
-            {
-                // Network player, receive data
-                tank.GetComponent<ChobiAssets.KTP.Damage_Control_CS>().currentDurability = (float)stream.ReceiveNext();
-            }
-        }
+        // public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        // {
+        //     if (stream.IsWriting)
+        //     {
+        //         // We own this player: send the others our data
+        //         stream.SendNext(tank.GetComponent<ChobiAssets.KTP.Damage_Control_CS>().currentDurability);
+        //     }
+        //     else
+        //     {
+        //         // Network player, receive data
+        //         tank.GetComponent<ChobiAssets.KTP.Damage_Control_CS>().currentDurability = (float)stream.ReceiveNext();
+        //     }
+        // }
 
         #endregion
     }

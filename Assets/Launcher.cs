@@ -1,6 +1,6 @@
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
+// using Photon.Pun;
+// using Photon.Realtime;
 
 // using DevToDev.Analytics;
 
@@ -8,7 +8,7 @@ using Sentry;
 
 namespace Com.MyCompany.MyGame
 {
-    public class Launcher : MonoBehaviourPunCallbacks
+    public class Launcher : MonoBehaviour//PunCallbacks
     {
         #region Private Serializable Fields
 
@@ -33,7 +33,7 @@ namespace Com.MyCompany.MyGame
         {
             // #Critical
             // this makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
-            PhotonNetwork.AutomaticallySyncScene = true;
+            // PhotonNetwork.AutomaticallySyncScene = true;
         }
 
         /// <summary>
@@ -72,63 +72,63 @@ namespace Com.MyCompany.MyGame
         public void Connect()
         {
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
-            if (!PhotonNetwork.IsConnected)
-            {
-                // #Critical, we must first and foremost connect to Photon Online Server.
-                isConnecting = PhotonNetwork.ConnectUsingSettings();
-                PhotonNetwork.GameVersion = gameVersion;
-            }
+            // if (!PhotonNetwork.IsConnected)
+            // {
+            //     // #Critical, we must first and foremost connect to Photon Online Server.
+            //     isConnecting = PhotonNetwork.ConnectUsingSettings();
+            //     PhotonNetwork.GameVersion = gameVersion;
+            // }
         }
 
         public void Join()
         {
-            if (!isConnecting)
-                PhotonNetwork.JoinRandomRoom();
+            // if (!isConnecting)
+                // PhotonNetwork.JoinRandomRoom();
         }
 
         #endregion
 
         #region MonoBehaviourPunCallbacks Callbacks
 
-        public override void OnConnectedToMaster()
-        {
-            Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
-            // if (isConnecting) {
-                // PhotonNetwork.JoinRandomRoom();
-                isConnecting = false;
-            // }
+        // public override void OnConnectedToMaster()
+        // {
+        //     Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
+        //     // if (isConnecting) {
+        //         // PhotonNetwork.JoinRandomRoom();
+        //         isConnecting = false;
+        //     // }
 
-            // DTDAnalytics.CustomEvent("PUN: onConnectedToMaster");
-        }
+        //     // DTDAnalytics.CustomEvent("PUN: onConnectedToMaster");
+        // }
 
-        public override void OnDisconnected(DisconnectCause cause)
-        {
-            Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
-        }
+        // public override void OnDisconnected(DisconnectCause cause)
+        // {
+        //     Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
+        // }
 
-        public override void OnJoinRandomFailed(short returnCode, string message)
-        {
-            Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
-            if (isConnecting) {
-                return;
-            }
-            // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-            PhotonNetwork.CreateRoom(null, new RoomOptions());
-        }
+        // public override void OnJoinRandomFailed(short returnCode, string message)
+        // {
+        //     Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
+        //     if (isConnecting) {
+        //         return;
+        //     }
+        //     // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
+        //     // PhotonNetwork.CreateRoom(null, new RoomOptions());
+        // }
 
-        public override void OnJoinedRoom()
-        {
-            Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
-            // #Critical: We only load if we are the first player, else we rely on `PhotonNetwork.AutomaticallySyncScene` to sync our instance scene.
-            if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
-            {
-                Debug.Log("We load the 'Field'");
+        // public override void OnJoinedRoom()
+        // {
+        //     Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+        //     // #Critical: We only load if we are the first player, else we rely on `PhotonNetwork.AutomaticallySyncScene` to sync our instance scene.
+        //     // if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        //     // {
+        //     //     Debug.Log("We load the 'Field'");
 
-                // #Critical
-                // Load the Room Level.
-                PhotonNetwork.LoadLevel("Field");
-            }
-        }
+        //     //     // #Critical
+        //     //     // Load the Room Level.
+        //     //     PhotonNetwork.LoadLevel("Field");
+        //     // }
+        // }
 
         #endregion
 
