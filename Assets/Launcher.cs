@@ -2,7 +2,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-using DevToDev.Analytics;
+// using DevToDev.Analytics;
 
 using Sentry;
 
@@ -41,13 +41,13 @@ namespace Com.MyCompany.MyGame
         /// </summary>
         void Start()
         {
-            var config = new DTDAnalyticsConfiguration
-            {
-                LogLevel = DTDLogLevel.Debug,
-                TrackingAvailability = DTDTrackingStatus.Enable,
-            };
-            DTDAnalytics.Initialize("5af4b8ef-8764-0913-8a10-07631f633087", config);
-            DTDAnalytics.StartActivity();
+            // var config = new DTDAnalyticsConfiguration
+            // {
+            //     LogLevel = DTDLogLevel.Debug,
+            //     TrackingAvailability = DTDTrackingStatus.Enable,
+            // };
+            // DTDAnalytics.Initialize("5af4b8ef-8764-0913-8a10-07631f633087", config);
+            // DTDAnalytics.StartActivity();
 
             SentrySdk.CaptureMessage("Test event");
 
@@ -56,7 +56,7 @@ namespace Com.MyCompany.MyGame
 
         void OnDestroy()
         {
-            DTDAnalytics.StopActivity();
+            // DTDAnalytics.StopActivity();
         }
 
         #endregion
@@ -98,7 +98,7 @@ namespace Com.MyCompany.MyGame
                 isConnecting = false;
             // }
 
-            DTDAnalytics.CustomEvent("PUN: onConnectedToMaster");
+            // DTDAnalytics.CustomEvent("PUN: onConnectedToMaster");
         }
 
         public override void OnDisconnected(DisconnectCause cause)

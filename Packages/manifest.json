@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.devtodev.sdk.analytics": "https://github.com/devtodev-analytics/package_Analytics.git",
     "com.unity.ugui": "1.0.0",
     "io.sentry.unity": "https://github.com/getsentry/unity.git#1.7.1",
     "com.unity.modules.ai": "1.0.0",
